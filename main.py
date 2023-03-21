@@ -3,17 +3,20 @@ import numpy as np
 
 frame_scale = 0.5
 mask_scale = 1.5
+face_landmarks_data = 'shape_predictor_68_face_landmarks.dat'
+mask_image = 'IMG_9323.png' #should be png
+
 """
 http://dlib.net/python/index.html#dlib_pybind11.shape_predictor
 http://devdoc.net/c/dlib-19.7/python/
 """
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor(face_landmarks_data)
 
 #캠에서 데이터 읽어온다 여러대일경우 0 1 2 3...
 cap = cv2.VideoCapture(0)
 
-overlay = cv2.imread('IMG_9323.png', cv2.IMREAD_UNCHANGED)
+overlay = cv2.imread(mask_image, cv2.IMREAD_UNCHANGED)
 
 def overlay_transparent(background_img, img_to_overlay_t, x, y, overlay_size=None):
     try:
